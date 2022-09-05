@@ -1,0 +1,24 @@
+/**
+ * Deno Config File
+ * - jsonc = JSON with comments
+ * - can be expanded as needed to configure integrated tsc, linter and formatter
+ */
+{
+    /**
+     * Typescript Compiler Options
+     */
+    "compilerOptions": {
+        "strict": true
+    },
+    "importMap": "importMap.json",
+    /**
+     * Deno tasks is currently unstable. 
+     If you need an alternative, you can use https://deno.land/x/velociraptor
+     * However, since the improved integration into VSCode since 1.21, 
+     * It seems like a vieable option, at least for deno module repositories. 
+     * Docs for Deno Tasks: https://deno.land/manual@v1.20.1/tools/task_runner
+     */
+    "tasks": {
+        "start": "deno run --unstable example/main.ts"
+    }
+}
