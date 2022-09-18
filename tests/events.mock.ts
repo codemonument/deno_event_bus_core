@@ -1,4 +1,4 @@
-import { BusEvent } from "/mod.ts";
+import { BusEvent } from "@/mod.ts";
 
 /**
  * For testing events without payload
