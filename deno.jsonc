@@ -20,6 +20,7 @@
      */
     "tasks": {
         "start": "deno run --unstable example/main.ts",
+        "test": "deno test --unstable ",
         // add the dependency file at deps/xxx.ts as param to this task
         "cache": "deno --unstable cache "
     }
