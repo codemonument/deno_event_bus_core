@@ -19,6 +19,8 @@
      * Docs for Deno Tasks: https://deno.land/manual@v1.20.1/tools/task_runner
      */
     "tasks": {
-        "start": "deno run --unstable example/main.ts"
+        "start": "deno run --unstable example/main.ts",
+        // add the dependency file at deps/xxx.ts as param to this task
+        "cache": "deno --unstable cache "
     }
 }
