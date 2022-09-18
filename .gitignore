@@ -3,3 +3,5 @@ playground/*
 dist/*
 !dist/.gitkeep
 .DS_Store
+
+npm
