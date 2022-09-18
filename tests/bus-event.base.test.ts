@@ -1,18 +1,18 @@
 import {
+  expectAssignable,
+  expectNotAssignable,
+  expectType,
+} from "npm:tsd@0.24.1";
+import { assert, assertStrictEquals, describe, it } from "std_testing";
+
+import {
   BusEvent,
   EventualPayload,
   NewableBusEvent,
   payloadOf,
 } from "@/mod.ts";
-import {
-  expectAssignable,
-  expectNotAssignable,
-  expectType,
-} from "npm:tsd@0.24.1";
 import { SimpleNewable } from "@/lib/event-bus/simple-newable.type.ts";
 import { DemoPayload, EventWithPayload, PlainEvent } from "./events.mock.ts";
-
-import { assert, assertStrictEquals, describe, it } from "std_testing";
 
 /**
  * Note: The Error TS2347 has the following description:
