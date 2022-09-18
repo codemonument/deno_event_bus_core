@@ -2,6 +2,7 @@
   "imports": {
     "/": "./",
     "std_log": "./deps/std_log.ts",
-    "std_testing": "./deps/std_testing.ts"
+    "std_testing": "./deps/std_testing.ts", 
+    "evt": "./deps/evt.ts"
   }
 }
