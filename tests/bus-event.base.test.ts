@@ -1,8 +1,4 @@
-import {
-  expectAssignable,
-  expectNotAssignable,
-  expectType,
-} from "npm:tsd@0.24.1";
+import { expectAssignable, expectNotAssignable, expectType } from "tsd";
 import { assert, assertStrictEquals, describe, it } from "std_testing";
 
 import {
@@ -22,16 +18,15 @@ import { DemoPayload, EventWithPayload, PlainEvent } from "./events.mock.ts";
  * The tsd library works a lot with "any" typings due to the nature of the library.
  * It should be used to test some types against other types and obviously these input types could be anything,
  * so any is very correct in this case.
- *
- * bje-2022-0918 Update: Supressing the error is not necessary bc. when importing tsd via "npm:tsd@version",
- * the type resolution seems to work correctly
  */
 
 describe(`EventualPayload`, () => {
   it(`should not accept assigning undefined to EventualPayload<DemoPayload>`, () => {
+    //@ts-expect-error TS2347`
     expectNotAssignable<EventualPayload<DemoPayload>>(undefined);
   });
   it(`should accept assigning undefined to EventualPayload<void>`, () => {
+    //@ts-expect-error TS2347`
     expectAssignable<EventualPayload<void>>(undefined);
   });
 });
@@ -47,10 +42,13 @@ describe(`bus-event.type`, () => {
     assert(event);
 
     // Type Expectations
+    //@ts-expect-error TS2347`
     expectType<void>(event.payload);
+    //@ts-expect-error TS2347`
     expectType<string>(event.type);
     // TODO: Test while using this event bus library, whether defining event.payload as void is enough
     // or if assignability to undefined is very useful
+    //@ts-expect-error TS2347`
     expectNotAssignable<undefined>(event.payload);
   });
 
@@ -66,6 +64,7 @@ describe(`bus-event.type`, () => {
     assertStrictEquals(event.payload, payload);
 
     // Type Expectations
+    //@ts-expect-error TS2347`
     expectType<DemoPayload>(event.payload);
   });
 
@@ -98,12 +97,14 @@ describe(`bus-event.type`, () => {
    * bc. the NewableBusEvent Interface has only the goal of allowing the `instanceof` check in <EventBus>.on$().
    */
   it(`PlainEvent should be assignable to SimpleNewable<PlainEvent>`, () => {
+    //@ts-expect-error TS2347`
     expectAssignable<SimpleNewable<PlainEvent>>(PlainEvent);
   });
 
   it(`PlainEvent should be assignable to NewableBusEvent<PlainEvent, void>`, () => {
     // Working with SimpleNewable in event-bus.ts for now, until payload typing errors are fixed!
     // CAUTION: VERY COMPLICATED TYPING!
+    //@ts-expect-error TS2347`
     expectType<NewableBusEvent<PlainEvent>>(PlainEvent);
   });
 
@@ -112,13 +113,16 @@ describe(`bus-event.type`, () => {
     const demoEvent = new EventWithPayload(demoPayload);
 
     // Ensures that demoEvent is a valid BusEvent
+    //@ts-expect-error TS2347`
     expectType<BusEvent<DemoPayload>>(demoEvent);
 
     // Ensures, that the extracted generic type argument of EventWithPayload is the same as the type of demoPayload variable
+    //@ts-expect-error TS2347`
     expectType<payloadOf<EventWithPayload>>(demoPayload);
 
     // Ensures, that EventWithPayload, which consists of `extends BusEvent<DemoPayloadType>`,
     // is the same as NewableBusEvent<EventWithPayload>
+    //@ts-expect-error TS2347`
     expectType<NewableBusEvent<EventWithPayload>>(EventWithPayload);
   });
 });
