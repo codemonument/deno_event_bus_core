@@ -4,7 +4,11 @@ import {
   NewableBusEvent,
   payloadOf,
 } from "@/mod.ts";
-import { expectAssignable, expectNotAssignable, expectType } from "tsd";
+import {
+  expectAssignable,
+  expectNotAssignable,
+  expectType,
+} from "npm:tsd@0.24.1";
 import { SimpleNewable } from "@/lib/event-bus/simple-newable.type.ts";
 import { DemoPayload, EventWithPayload, PlainEvent } from "./events.mock.ts";
 
@@ -21,7 +25,6 @@ import { assert, assertStrictEquals, describe, it } from "std_testing";
 
 describe(`EventualPayload`, () => {
   it(`should not accept assigning undefined to EventualPayload<DemoPayload>`, () => {
-    //@ts-expect-error TS2347
     expectNotAssignable<EventualPayload<DemoPayload>>(undefined);
   });
   it(`should accept assigning undefined to EventualPayload<void>`, () => {

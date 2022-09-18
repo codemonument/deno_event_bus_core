@@ -1,4 +1,4 @@
-import { filter, map, Observable, Subject } from "rxjs";
+import { filter, map, Observable, Subject } from "npm:rxjs@7.5.6";
 import {
   BusEvent,
   EventualPayload,
