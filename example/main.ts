@@ -1,5 +1,4 @@
-import { EventBusRxJs as EventBus } from "../lib/event-bus/event-bus.rxjs.ts";
-import { BusEvent } from "@mod";
+import { BusEvent, EventBusRxJs as EventBus } from "@mod";
 
 // Create new EventBus instance
 const bus = new EventBus();
