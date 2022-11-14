@@ -6,7 +6,7 @@ import {
   payloadOf,
 } from "./bus-event.base.ts";
 
-export class EventBus {
+export class EventBusRxJs {
   private eventStream: Subject<unknown> = new Subject<unknown>();
 
   // --- PUBLIC FUNCTIONS ---

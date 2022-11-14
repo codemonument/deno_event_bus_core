@@ -9,7 +9,7 @@ import {
 /**
  * This is the 'evt' variant of this event bus class to get rid of the rxjs dependency
  */
-export class EventBus {
+export class EventBusEvt {
   private eventStream: Evt<unknown> = new Evt<unknown>();
 
   // --- PUBLIC FUNCTIONS ---
