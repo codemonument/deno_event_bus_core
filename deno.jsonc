@@ -14,9 +14,8 @@
     "tasks": {
         "start": "deno run --unstable example/main.ts",
         "test": "deno test --unstable -A",
-        // add the dependency file at deps/xxx.ts as param to this task
-        "cache": "deno --unstable cache ",
-        "build": "deno run -A ./scripts/dnt-build.ts"
+        "build": "deno run -A ./scripts/dnt-build.ts", 
+        "publish": "npm publish ./npm --access=public"
     }, 
     "test": {
         "files": {
