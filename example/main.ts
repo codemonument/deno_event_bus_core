@@ -1,28 +1,43 @@
 import { EventBusRxJs as EventBus } from "../lib/event-bus/event-bus.rxjs.ts";
 import { BusEvent } from "@mod";
 
+// Create new EventBus instance
 const bus = new EventBus();
 
-export class PauseEvent extends BusEvent<void> {
-  public type = "PauseEvent";
+// Create an empty bus event
+export class PlainEvent extends BusEvent<void> {
+  public type = "PlainEvent";
 }
 
-export class SetCellValue extends BusEvent<{ value: number }> {
-  public type = "SetCellValue";
+// Create a bus event with payload
+export interface DemoPayload {
+  value: number;
+}
+export class EventWithPayload extends BusEvent<DemoPayload> {
+  public type = "EventWithPayload";
 }
 
-bus.eventStream$.subscribe((event: unknown) => {
+// Subscribe to events
+const sub1 = bus.on$(PlainEvent).subscribe(() => {
+  console.log(`Received PlainEvent!`);
+});
+
+const sub2 = bus.on$(EventWithPayload).subscribe((payload: DemoPayload) => {
+  console.log(`Received EventWithPayload!`, payload);
+});
+
+/**
+ * Advanced Usage
+ */
+const advancedSub = bus.eventStream$.subscribe((event: unknown) => {
   console.log(`Received Event: `, event);
 });
 
-bus.on$(PauseEvent).subscribe(() => {
-  console.log(`Pause called!`);
-});
+// Emit events
+bus.emit(new PlainEvent());
+bus.emit(new EventWithPayload({ value: 10 }));
 
-bus.on$(SetCellValue).subscribe((payload: { value: number }) => {
-  console.log(`Set Cell Value called!`, payload);
-});
-
-bus.emit(new PauseEvent());
-
-bus.emit(new SetCellValue({ value: 10 }));
+// Clean up your rxjs subscriptions!
+sub1.unsubscribe();
+sub2.unsubscribe();
+advancedSub.unsubscribe();
