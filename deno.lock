@@ -110,5 +110,18 @@
     "https://deno.land/std@0.156.0/log/levels.ts": "82c965b90f763b5313e7595d4ba78d5095a13646d18430ebaf547526131604d1",
     "https://deno.land/std@0.156.0/log/logger.ts": "b545159727b023825ee6814d9178fb2a7472f8d95d704c253b771b95c658cf8c",
     "https://deno.land/std@0.156.0/log/mod.ts": "62d56c28e8fbaa0f6c8b6df41cb31e47c51ae8a93e78559612ecb5a4f76d7424"
+  },
+  "npm": {
+    "specifiers": { "rxjs@7.5.7": "rxjs@7.5.7" },
+    "packages": {
+      "rxjs@7.5.7": {
+        "integrity": "sha512-z9MzKh/UcOqB3i20H6rtrlaE/CgjLOvheWK/9ILrbhROGTweAi1BaFsTT9FbwZi5Trr1qNRs+MXkhmR06awzQA==",
+        "dependencies": { "tslib": "tslib@2.4.1" }
+      },
+      "tslib@2.4.1": {
+        "integrity": "sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==",
+        "dependencies": {}
+      }
+    }
   }
 }
