@@ -1,6 +1,5 @@
-import { log } from "std_log";
 import { EventBus } from "../lib/event-bus/event-bus.rxjs.ts";
-import { BusEvent } from "@/mod.ts";
+import { BusEvent } from "@mod";
 
 const bus = new EventBus();
 
