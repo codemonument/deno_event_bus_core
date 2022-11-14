@@ -1,6 +1,6 @@
 {
   "imports": {
-    "@": "./",
+    "@/": "./",
     "@mod": "./mod.ts",
     "@version": "./version.ts",
     "@deps/": "./deps/",
