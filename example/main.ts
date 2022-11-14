@@ -12,6 +12,10 @@ export class SetCellValue extends BusEvent<{ value: number }> {
   public type = "SetCellValue";
 }
 
+bus.eventStream$.subscribe((event: unknown) => {
+  console.log(`Received Event: `, event);
+});
+
 bus.on$(PauseEvent).subscribe(() => {
   console.log(`Pause called!`);
 });
