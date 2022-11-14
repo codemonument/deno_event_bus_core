@@ -11,6 +11,9 @@ await build({
     // see JS docs for overview and more options
     deno: true,
   },
+
+  // Don't emit tests, bc. the import_map.json imports confuse npm due to dnt not resolving them! :/
+  test: false,
   package: {
     // package.json properties
     // TODO: package name is not final!
