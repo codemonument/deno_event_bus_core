@@ -15,7 +15,7 @@
         "start": "deno run --unstable example/main.ts",
         "test": "deno test --unstable -A",
         "build": "deno run -A ./scripts/dnt-build.ts", 
-        "publish": "npm publish ./npm --access=public"
+        "publish": "npm publish ./npm --access=public && git push --tags"
     }, 
     "test": {
         "files": {
