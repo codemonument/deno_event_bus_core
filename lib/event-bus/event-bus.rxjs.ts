@@ -30,7 +30,7 @@ export class EventBus {
       // Maps the events to their payloads for easier consumption
       // Note: The return type must be EventualPayload here
       //       to not get `P | undefined` as return type of this map
-      map((event) =>
+      map((event: any) =>
         event.payload !== undefined
           ? event.payload
           : (undefined as EventualPayload<payloadOf<E>>)
