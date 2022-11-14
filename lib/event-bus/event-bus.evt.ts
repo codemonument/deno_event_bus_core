@@ -1,4 +1,4 @@
-import { Evt, Operator } from "evt";
+import { Evt, Operator } from "../../deps/evt.ts";
 import {
   BusEvent,
   EventualPayload,
