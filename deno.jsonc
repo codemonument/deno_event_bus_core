@@ -17,5 +17,10 @@
         // add the dependency file at deps/xxx.ts as param to this task
         "cache": "deno --unstable cache ",
         "build": "deno run -A ./scripts/dnt-build.ts"
+    }, 
+    "test": {
+        "files": {
+            "exclude": ["npm", ".npm"]
+        }
     }
 }
