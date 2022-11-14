@@ -16,7 +16,7 @@ bus.on$(PauseEvent).subscribe(() => {
   console.log(`Pause called!`);
 });
 
-bus.on$(SetCellValue).subscribe((payload: any) => {
+bus.on$(SetCellValue).subscribe((payload: { value: number }) => {
   console.log(`Set Cell Value called!`, payload);
 });
 
