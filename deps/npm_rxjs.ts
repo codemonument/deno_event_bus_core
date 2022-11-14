@@ -3,5 +3,5 @@
 
 // TODO: When working: Replace direct import in event-bus.ts with 'rxjs' bare import via importMap
 
-// export * from "npm:rxjs@7.5.6";
-export * from "https://cdn.skypack.dev/rxjs@7.5.7?dts";
+export * from "npm:rxjs@7.5.7";
+// export * from "https://cdn.skypack.dev/rxjs@7.5.7?dts";
