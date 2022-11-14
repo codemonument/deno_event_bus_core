@@ -1,4 +1,4 @@
-import { EventBus } from "../lib/event-bus/event-bus.rxjs.ts";
+import { EventBusRxJs as EventBus } from "../lib/event-bus/event-bus.rxjs.ts";
 import { BusEvent } from "@mod";
 
 const bus = new EventBus();
