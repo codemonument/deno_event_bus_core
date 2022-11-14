@@ -67,11 +67,12 @@ bus.eventStream$.subscribe((event: unknown) => {
 });
 ```
 
-## Todos 
+## Todos in this Repo
 
-1. Add Code from event-bus-nx package for rx version
-2. Rewrite tests for deno 
-3. Check if anything still works 
+1. Add test for event-bus.rxjs.ts 
+2. Add Code from event-bus-nx package for rx version (esp. EventBus Callback Group)
+3. Rewrite tests for deno 
+4. Check if anything still works 
 
 ## Considerations
 
