@@ -64,6 +64,7 @@ bus.eventStream$.subscribe((event: unknown) => {
 ```
 
 Normally, the `type` key of the BusEvent base-class is auto generated as `this.constructor.name`, which will contain the name of the class extending the BusEvent base-class. 
+This `type` key is used to match the event listeners with the events on the bus. 
 However, if you have two classes called the same name, this will collide. 
 To avoid this, you can override the `type` key in your event class with a custom string like this: 
 

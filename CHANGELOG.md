@@ -1,5 +1,11 @@
 # Changelog 
 
+## 1.0.0-beta.5 - 2022-11-15 
+
+- Allow Event Classes extending BaseEvent<T> to not declare the `type` key. 
+  Will be set to this.constructor.name per default, which evaluates to the classname of the Event Class extending BaseEvent<T> automatically. 
+- Re-label possibility to override the `type` property of Event Classes as explicit definition of this type key. 
+
 ## 1.0.0-beta.4 - 2022-11-14 
 
 - Adjusted readme to include usage instructions
