@@ -1,4 +1,4 @@
-import { EventBusRxJs as EventBus, EventualPayload, payloadOf } from "@mod";
+import { EventBusRxJS as EventBus, EventualPayload, payloadOf } from "@mod";
 import { Observable, take } from "@deps/npm_rxjs.ts";
 import { expectType } from "@deps/npm_tsd.ts";
 import {

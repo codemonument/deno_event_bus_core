@@ -1,5 +1,5 @@
 import { Subscription } from "../../deps/npm_rxjs.ts";
-import { EventBusRxJs as EventBus } from "../event-bus/event-bus.rxjs.ts";
+import { EventBusRxJS as EventBus } from "../event-bus/event-bus.rxjs.ts";
 import {
   BusEvent,
   EventualPayload,

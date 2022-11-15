@@ -1,6 +1,6 @@
 import {
   BusEvent,
-  EventBusRxJs as EventBus,
+  EventBusRxJS as EventBus,
 } from "@codemonument/event-bus-core";
 
 // Create new EventBus instance

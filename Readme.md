@@ -3,7 +3,7 @@
 ## How to Import in Node 
 
 ```ts
-import { EventBusRxJs as EventBus } from "@codemonument/event-bus-core";
+import { EventBusRxJS as EventBus } from "@codemonument/event-bus-core";
 ```
 
 ## How to Import in Deno
@@ -11,13 +11,13 @@ import { EventBusRxJs as EventBus } from "@codemonument/event-bus-core";
 Note: Use import url with specific version in production to avoid sudden breaking changes.
 
 ```ts
-import { EventBusRxJs as EventBus } from "https://deno.land/x/event_bus_core/mod.ts";
+import { EventBusRxJS as EventBus } from "https://deno.land/x/event_bus_core/mod.ts";
 ```
 
 ## Usage 
 
 ```ts 
-import { EventBusRxJs as EventBus } from "https://deno.land/x/event_bus_core";
+import { EventBusRxJS as EventBus } from "https://deno.land/x/event_bus_core";
 
 // Create new EventBus instance
 const bus = new EventBus();
