@@ -13,16 +13,6 @@ import {
   PlainEvent,
 } from "@testdata/events.mock.ts";
 
-/**
- * bje-2022-09-18 Note: The Error TS2347 has the following description:
- * > Untyped function calls may not accept type arguments.deno-ts(2347)
- *
- * Reason for supressing it here with `//@ts-expect-error TS2347`:
- * The tsd library works a lot with "any" typings due to the nature of the library.
- * It should be used to test some types against other types and obviously these input types could be anything,
- * so any is very correct in this case.
- */
-
 describe(`EventualPayload`, () => {
   it(`should not accept assigning undefined to EventualPayload<DemoPayload>`, () => {
     expectNotAssignable<EventualPayload<DemoPayload>>(undefined);
