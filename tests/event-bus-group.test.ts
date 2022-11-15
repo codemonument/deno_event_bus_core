@@ -12,15 +12,15 @@ describe(`event-bus-group.test`, () => {
     assertExists(eGroup);
   });
 
-  it(`should receive PlainEvent in callback (test event registration)`, () => {
+  it(`should receive PlainEvent in callback (test event registration)`, async () => {
     const eBus = new EventBus();
     const eGroup = new EventBusGroup(eBus);
+    const plainEventReceived = pDefer();
 
-    eGroup.on(PlainEvent, () => {
-      console.log(`Received Plain Event in EventGroup!`);
-    });
+    eGroup.on(PlainEvent, plainEventReceived.resolve);
 
     eBus.emit(new PlainEvent());
+    await plainEventReceived.promise;
   });
 
   it(`should receive DemoPayload in callback (test EventWithPayload)`, () => {
@@ -77,7 +77,6 @@ describe(`event-bus-group.test`, () => {
 
   it(`should trigger custom error callback from EventBusGroup constructor`, async () => {
     const eBus = new EventBus();
-
     // Makes EventBusGroup errorhandler observable via promise
     const deferredErrorHandler = pDefer();
     const eGroup = new EventBusGroup(eBus, deferredErrorHandler.resolve);
@@ -97,47 +96,47 @@ describe(`event-bus-group.test`, () => {
     eGroup.unsubscribeAll();
   });
 
-  // it(`should trigger custom error callback from eGroup.on()`, async (tc) => {
-  //   const eBus = new EventBus();
-  //   const eGroup = new EventBusGroup(eBus);
+  it(`should trigger custom error callback from eGroup.on()`, async () => {
+    const eBus = new EventBus();
+    const eGroup = new EventBusGroup(eBus);
+    const deferredErrorHandler = pDefer();
 
-  //   eGroup.on(PlainEvent, () => {
-  //     throw new Error(`Fake error in callback!`);
-  //   }, {
-  //     errorCallback: (error: unknown) => {
-  //       const parsedError = z.instanceof(Error).parse(error);
-  //       assertExists(parsedError);
-  //       assertEquals(parsedError.message, `Fake error in callback!`);
-  //     },
-  //   });
+    eGroup.on(PlainEvent, () => {
+      throw new Error(`Fake error in callback!`);
+    }, {
+      errorCallback: deferredErrorHandler.resolve,
+    });
 
-  //   eBus.emit(new PlainEvent());
+    eBus.emit(new PlainEvent());
 
-  //   // makes sure that callbacks above are executed,
-  //   // since deno test does not have a concept of a `done` callback, like jest
-  //   await firstValueFrom(eBus.eventStream$);
-  //   eGroup.unsubscribeAll();
-  // });
+    const error = await deferredErrorHandler.promise;
+    const parsedError = z.instanceof(Error).parse(error);
+    assertExists(parsedError);
+    assertEquals(parsedError.message, `Fake error in callback!`);
 
-  // it(`should allow overwriting error callback with setDefaultErrorCallback`, async (tc) => {
-  //   const eBus = new EventBus();
-  //   const eGroup = new EventBusGroup(eBus);
+    // not required in this test, but best practice
+    eGroup.unsubscribeAll();
+  });
 
-  //   eGroup.setDefaultErrorCallback((error: unknown) => {
-  //     const parsedError = z.instanceof(Error).parse(error);
-  //     assertExists(parsedError);
-  //     assertEquals(parsedError.message, `Fake error in callback!`);
-  //   });
+  it(`should allow overwriting error callback with setDefaultErrorCallback`, async () => {
+    const eBus = new EventBus();
+    const eGroup = new EventBusGroup(eBus);
+    const deferredErrorHandler = pDefer();
 
-  //   eGroup.on(PlainEvent, () => {
-  //     throw new Error(`Fake error in callback!`);
-  //   });
+    eGroup.setDefaultErrorCallback(deferredErrorHandler.resolve);
 
-  //   eBus.emit(new PlainEvent());
+    eGroup.on(PlainEvent, () => {
+      throw new Error(`Fake error in callback!`);
+    });
 
-  //   // makes sure that callbacks above are executed,
-  //   // since deno test does not have a concept of a `done` callback, like jest
-  //   await firstValueFrom(eBus.eventStream$);
-  //   eGroup.unsubscribeAll();
-  // });
+    eBus.emit(new PlainEvent());
+
+    const error = await deferredErrorHandler.promise;
+    const parsedError = z.instanceof(Error).parse(error);
+    assertExists(parsedError);
+    assertEquals(parsedError.message, `Fake error in callback!`);
+
+    // not required in this test, but best practice
+    eGroup.unsubscribeAll();
+  });
 });
