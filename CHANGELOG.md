@@ -1,5 +1,11 @@
 # Changelog 
 
+## 1.0.0.beta.6 - 2022-11-16 
+
+- Add new class EventBusGroup. Allows the user to interact with the event bus in a callback-style way. 
+  Records all created subscriptions to the filtered rxjs event streams and is able to unregister them all at once.
+- Add tests for EventBusRxJs and EventBusGroup
+
 ## 1.0.0-beta.5 - 2022-11-15 
 
 - Allow Event Classes extending BaseEvent<T> to not declare the `type` key. 
