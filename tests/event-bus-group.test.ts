@@ -1,8 +1,8 @@
 import { EventBusGroup, EventBusRxJs as EventBus } from "@mod";
 import { EventWithPayload, PlainEvent } from "@testdata/events.mock.ts";
 import { assertEquals, assertExists, describe, it } from "@deps/std_testing.ts";
-import pDefer from "p-defer";
 import { assertError } from "@testutils/assertError.ts";
+import pDefer from "p-defer";
 
 describe(`event-bus-group.test`, () => {
   it(`should be constructed`, () => {
