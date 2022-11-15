@@ -1,9 +1,8 @@
 import { EventBusGroup, EventBusRxJs as EventBus } from "@mod";
 import { EventWithPayload, PlainEvent } from "@testdata/events.mock.ts";
 import { assertEquals, assertExists, describe, it } from "@deps/std_testing.ts";
-import { firstValueFrom } from "../deps/npm_rxjs.ts";
-import { z } from "zod";
 import pDefer from "p-defer";
+import { assertError } from "@testutils/assertError.ts";
 
 describe(`event-bus-group.test`, () => {
   it(`should be constructed`, () => {
@@ -88,9 +87,7 @@ describe(`event-bus-group.test`, () => {
     eBus.emit(new PlainEvent());
 
     const error = await deferredErrorHandler.promise;
-    const parsedError = z.instanceof(Error).parse(error);
-    assertExists(parsedError);
-    assertEquals(parsedError.message, `Fake error in callback!`);
+    assertError(error, `Fake error in callback!`);
 
     // not required in this test, but best practice
     eGroup.unsubscribeAll();
@@ -110,9 +107,7 @@ describe(`event-bus-group.test`, () => {
     eBus.emit(new PlainEvent());
 
     const error = await deferredErrorHandler.promise;
-    const parsedError = z.instanceof(Error).parse(error);
-    assertExists(parsedError);
-    assertEquals(parsedError.message, `Fake error in callback!`);
+    assertError(error, `Fake error in callback!`);
 
     // not required in this test, but best practice
     eGroup.unsubscribeAll();
@@ -132,9 +127,7 @@ describe(`event-bus-group.test`, () => {
     eBus.emit(new PlainEvent());
 
     const error = await deferredErrorHandler.promise;
-    const parsedError = z.instanceof(Error).parse(error);
-    assertExists(parsedError);
-    assertEquals(parsedError.message, `Fake error in callback!`);
+    assertError(error, `Fake error in callback!`);
 
     // not required in this test, but best practice
     eGroup.unsubscribeAll();
