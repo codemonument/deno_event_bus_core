@@ -4,6 +4,7 @@
  */
 // Event Bus Section with basic BusEvent<> generic type
 export * from "./lib/event-bus/event-bus.rxjs.ts";
+export * from "./lib/event-bus-group/event-bus-group.ts";
 
 /**
  * CAUTION: Heavily work in project!
