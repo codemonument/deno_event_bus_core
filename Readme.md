@@ -23,17 +23,13 @@ import { EventBusRxJs as EventBus } from "https://deno.land/x/event_bus_core";
 const bus = new EventBus();
 
 // Create an empty bus event
-export class PlainEvent extends BusEvent<void> {
-  public type = "PlainEvent";
-}
+export class PlainEvent extends BusEvent<void> {}
 
 // Create a bus event with payload
 export interface DemoPayload {
   value: number;
 }
-export class EventWithPayload extends BusEvent<DemoPayload> {
-  public type = "EventWithPayload";
-}
+export class EventWithPayload extends BusEvent<DemoPayload> {}
 
 // Subscribe to events
 const sub1 = bus.on$(PlainEvent).subscribe(() => {
@@ -55,7 +51,7 @@ sub2.unsubscribe();
 
 ```
 
-## Advanced Usage 
+## Advanced Usages
 
 You can subscribe to the underlying RxJS Observable of this event bus, called bus.eventStream$. 
 This exposes the raw events to you. 
@@ -65,6 +61,16 @@ Normally you don't need this and it's better to use the bus.on$ method which fil
 bus.eventStream$.subscribe((event: unknown) => {
   console.log(`Received Event: `, event);
 });
+```
+
+Normally, the `type` key of the BusEvent base-class is auto generated as `this.constructor.name`, which will contain the name of the class extending the BusEvent base-class. 
+However, if you have two classes called the same name, this will collide. 
+To avoid this, you can override the `type` key in your event class with a custom string like this: 
+
+```ts
+export class ExplicitTypeEvent extends BusEvent<void> {
+  override type = "my-explicit-event-type";
+}
 ```
 
 ## Todos in this Repo
