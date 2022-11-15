@@ -8,9 +8,10 @@ import { assert, assertStrictEquals, describe, it } from "@deps/std_testing.ts";
 import { BusEvent, EventualPayload, NewableBusEvent, payloadOf } from "@mod";
 import { SimpleNewable } from "@/lib/event-bus/simple-newable.type.ts";
 import {
-  AutogenEvent,
   DemoPayload,
   EventWithPayload,
+  ExplicitTypeEvent,
+  ImplicitTypeEvent,
   PlainEvent,
 } from "@testdata/events.mock.ts";
 
@@ -109,9 +110,13 @@ describe(`bus-event.type`, () => {
     expectType<NewableBusEvent<EventWithPayload>>(EventWithPayload);
   });
 
-  it(`AutogenEvent should have a type field with the same name as the class`, () => {
-    const event = new AutogenEvent();
-    console.log(event.type);
-    assert(event.type === "AutogenEvent");
+  it(`ImplicitTypeEvent should have a 'type' field with 'ImplicitTypeEvent'`, () => {
+    const event = new ImplicitTypeEvent();
+    assert(event.type === "ImplicitTypeEvent");
+  });
+
+  it(`ExplicitTypeEvent should have an overriden 'type' field with 'my-explicit-event-type'`, () => {
+    const event = new ExplicitTypeEvent();
+    assert(event.type === "my-explicit-event-type");
   });
 });

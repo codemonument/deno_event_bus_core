@@ -14,4 +14,11 @@ export class EventWithPayload extends BusEvent<DemoPayload> {}
 /**
  * For testing events with auto-generated event type
  */
-export class AutogenEvent extends BusEvent<void> {}
+export class ImplicitTypeEvent extends BusEvent<void> {}
+
+/**
+ * For testing events with explicitely overriden event type
+ */
+export class ExplicitTypeEvent extends BusEvent<void> {
+  override type = "my-explicit-event-type";
+}
