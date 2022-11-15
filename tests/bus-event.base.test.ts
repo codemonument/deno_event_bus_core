@@ -8,6 +8,7 @@ import { assert, assertStrictEquals, describe, it } from "@deps/std_testing.ts";
 import { BusEvent, EventualPayload, NewableBusEvent, payloadOf } from "@mod";
 import { SimpleNewable } from "@/lib/event-bus/simple-newable.type.ts";
 import {
+  AutogenEvent,
   DemoPayload,
   EventWithPayload,
   PlainEvent,
@@ -106,5 +107,11 @@ describe(`bus-event.type`, () => {
     // Ensures, that EventWithPayload, which consists of `extends BusEvent<DemoPayloadType>`,
     // is the same as NewableBusEvent<EventWithPayload>
     expectType<NewableBusEvent<EventWithPayload>>(EventWithPayload);
+  });
+
+  it(`AutogenEvent should have a type field with the same name as the class`, () => {
+    const event = new AutogenEvent();
+    console.log(event.type);
+    assert(event.type === "AutogenEvent");
   });
 });

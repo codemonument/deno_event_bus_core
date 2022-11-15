@@ -22,7 +22,8 @@ export type EventualPayload<P> = P extends void ? void : P;
  * === "type variable" for the typescript type of the payload incomming into the constructor.
  */
 export abstract class BusEvent<payloadType> {
-  public abstract readonly type: string;
+  // This property will be filled with the name of the class extending this base
+  public readonly type: string = this.constructor.name;
   constructor(public readonly payload: EventualPayload<payloadType>) {}
 }
 
@@ -61,13 +62,13 @@ export type payloadOf<eventType> = ExtractGenericArgument<eventType>;
  */
 
 export interface NewableBusEvent<
-  eventType extends BusEvent<payloadOf<eventType>>
+  eventType extends BusEvent<payloadOf<eventType>>,
 > {
   // payloadType - Define that the constructor gets a Payload
   // Type of the payload is not so clear here,
   // could be of type EventualPayload<P>
   // or simply type: payloadType
   new <payloadType extends payloadOf<eventType>>(
-    payload: payloadType
+    payload: payloadType,
   ): eventType;
 }

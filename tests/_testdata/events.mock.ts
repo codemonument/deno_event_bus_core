@@ -3,17 +3,15 @@ import { BusEvent } from "@mod";
 /**
  * For testing events without payload
  */
-export class PlainEvent extends BusEvent<void> {
-  public type = "PlainEvent";
-}
+export class PlainEvent extends BusEvent<void> {}
 
 /**
  * For testing events with payload
  */
-export interface DemoPayload {
-  name: string;
-}
+export type DemoPayload = { name: string };
+export class EventWithPayload extends BusEvent<DemoPayload> {}
 
-export class EventWithPayload extends BusEvent<DemoPayload> {
-  public type = "EventWithPayload";
-}
+/**
+ * For testing events with auto-generated event type
+ */
+export class AutogenEvent extends BusEvent<void> {}

@@ -4,17 +4,13 @@ import { BusEvent, EventBusRxJs as EventBus } from "@mod";
 const bus = new EventBus();
 
 // Create an empty bus event
-export class PlainEvent extends BusEvent<void> {
-  public type = "PlainEvent";
-}
+export class PlainEvent extends BusEvent<void> {}
 
 // Create a bus event with payload
 export interface DemoPayload {
   value: number;
 }
-export class EventWithPayload extends BusEvent<DemoPayload> {
-  public type = "EventWithPayload";
-}
+export class EventWithPayload extends BusEvent<DemoPayload> {}
 
 // Subscribe to events
 const sub1 = bus.on$(PlainEvent).subscribe(() => {
