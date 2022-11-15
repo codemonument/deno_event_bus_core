@@ -7,7 +7,7 @@ export * from "./lib/event-bus/event-bus.rxjs.ts";
 export * from "./lib/event-bus-group/event-bus-group.ts";
 
 /**
- * CAUTION: Heavily work in project!
+ * CAUTION: evt event bus Heavily work in progress!
  */
 // export * from "./lib/event-bus/event-bus.evt.ts";
 
