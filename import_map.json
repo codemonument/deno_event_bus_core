@@ -1,12 +1,12 @@
 {
-  "imports": {
-    "@/": "./",
-    "@mod": "./mod.ts",
-    "@version": "./version.ts",
-    "@deps/": "./deps/",
-    "@testutils/": "./tests/_testutils/",
-    "@testdata/": "./tests/_testdata/",
-    "zod": "https://deno.land/x/zod@v3.19.1/mod.ts",
-    "p-defer": "npm:p-defer@4.0.0"
-  }
+	"imports": {
+		"@/": "./",
+		"@mod": "./mod.ts",
+		"@version": "./version.ts",
+		"@deps/": "./deps/",
+		"@testutils/": "./tests/_testutils/",
+		"@testdata/": "./tests/_testdata/",
+		"zod": "https://deno.land/x/zod@v3.22.4/mod.ts",
+		"p-defer": "npm:p-defer@4.0.0"
+	}
 }
