@@ -12,9 +12,9 @@
     "strict": true
   },
   "tasks": {
-    "start": "deno run --unstable example/main.ts",
-    "test": "deno test --unstable -A",
-    "testu": "deno test --unstable -A -- --update",
+    "start": "deno run example/main.ts",
+    "test": "deno test -A",
+    "testu": "deno test -A -- --update",
     "build": "deno run -A ./scripts/dnt-build.ts",
     "publish": "npm publish ./npm --access=public && git push --tags"
   },
