@@ -1,5 +1,5 @@
 // ex. scripts/build_npm.ts
-import { build, emptyDir } from "https://deno.land/x/dnt@0.31.0/mod.ts";
+import { build, emptyDir } from "https://deno.land/x/dnt@0.40.0/mod.ts";
 import { VERSION } from "@version";
 
 await emptyDir("./npm");
@@ -16,7 +16,6 @@ await build({
   test: false,
   package: {
     // package.json properties
-    // TODO: package name is not final!
     name: "@codemonument/event-bus-core",
     version: VERSION,
     description: "A typescript event bus with fully typed events",
