@@ -7,8 +7,8 @@
 export * from "./lib/event-bus/event-bus.rxjs.ts";
 export * from "./lib/event-bus/bus-event.base.ts";
 
-// Export EventBusRxJS as "default" EventBus identifier
-export * as EventBus from "./lib/event-bus/event-bus.rxjs.ts";
+// Export EventBusRxJS
+export * from "./lib/event-bus/event-bus.rxjs.ts";
 
 // Event-Bus-Group Section
 export * from "./lib/event-bus-group/event-bus-group.ts";
