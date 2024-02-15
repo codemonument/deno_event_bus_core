@@ -4,23 +4,22 @@
  * - can be expanded as needed to configure integrated tsc, linter and formatter
  */
 {
-    /**
+  /**
      * Typescript Compiler Options
      */
-    "compilerOptions": {
-        "strict": true
-    },
-    "importMap": "import_map.json",
-    "tasks": {
-        "start": "deno run --unstable example/main.ts",
-        "test": "deno test --unstable -A",
-        "testu": "deno test --unstable -A -- --update",
-        "build": "deno run -A ./scripts/dnt-build.ts", 
-        "publish": "npm publish ./npm --access=public && git push --tags"
-    }, 
-    "test": {
-        "files": {
-            "exclude": ["npm", ".npm"]
-        }
-    }
+  "lock": false,
+  "compilerOptions": {
+    "strict": true
+  },
+  "importMap": "import_map.json",
+  "tasks": {
+    "start": "deno run --unstable example/main.ts",
+    "test": "deno test --unstable -A",
+    "testu": "deno test --unstable -A -- --update",
+    "build": "deno run -A ./scripts/dnt-build.ts",
+    "publish": "npm publish ./npm --access=public && git push --tags"
+  },
+  "test": {
+    "exclude": ["npm", ".npm"]
+  }
 }
