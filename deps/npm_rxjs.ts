@@ -3,4 +3,4 @@
 // export * from "https://cdn.skypack.dev/rxjs@7.5.7?dts";
 
 // use esm.sh bc. it also has full type autocomplete for rxjs!
-export * from "https://esm.sh/rxjs@7.5.7";
+export * from "https://esm.sh/rxjs@7.8.1";
