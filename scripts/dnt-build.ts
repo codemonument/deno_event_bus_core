@@ -12,6 +12,14 @@ await build({
     deno: true,
   },
 
+  mappings: {
+    "https://esm.sh/rxjs@7.8.1": {
+      name: "rxjs",
+      version: "^7.8.1",
+      peerDependency: true,
+    },
+  },
+
   // Don't emit tests, bc. the import_map.json imports confuse npm due to dnt not resolving them! :/
   test: false,
   package: {
