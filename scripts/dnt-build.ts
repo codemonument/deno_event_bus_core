@@ -22,6 +22,8 @@ await build({
 
   // Don't emit tests, bc. the import_map.json imports confuse npm due to dnt not resolving them! :/
   test: false,
+  // Don't skip npm install, otherwise the build fails
+  // skipNpmInstall: true,
   package: {
     // package.json properties
     name: "@codemonument/event-bus-core",
