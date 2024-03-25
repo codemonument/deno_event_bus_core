@@ -12,6 +12,8 @@ await build({
     deno: true,
   },
 
+  packageManager: "bun",
+
   mappings: {
     "https://esm.sh/rxjs@7.8.1": {
       name: "rxjs",
