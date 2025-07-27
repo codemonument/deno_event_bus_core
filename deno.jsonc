@@ -20,8 +20,6 @@
     // todo: add --doc flag to test
     "test": "deno test -A",
     "testu": "deno test -A -- --update",
-    "build": "deno run -A ./scripts/dnt-build.ts",
-    "publish": "npm publish ./npm --access=public && git push --tags",
 		"dry": "deno publish --dry-run --allow-slow-types"
     // note: no need for final publish step, as it's done by github actions
   },
