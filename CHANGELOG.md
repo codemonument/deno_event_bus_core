@@ -4,6 +4,7 @@
 
 - fix link to jsr in badge in readme
 - update install instructions in readme
+- rename Readme.md to README.md, so that JSR finds it
 
 ## 1.0.2 - 2025-07-27
 
