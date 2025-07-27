@@ -1,0 +1,19 @@
+{
+	"name": "playground",
+	"version": "1.0.0",
+	"description": "",
+	"private": "true",
+	"type": "module",
+	"scripts": {
+		"start": "node --experimental-strip-types index.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@codemonument/event-bus-core": "npm:@jsr/codemonument__event-bus-core@^1.0.2"
+	},
+	"devDependencies": {
+		"@types/node": "^24.1.0"
+	}
+}
