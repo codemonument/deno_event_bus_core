@@ -6,8 +6,8 @@ Based on RXJS, with nicely typed event classes.
 Published to (click badge to view): [![JSR](https://jsr.io/badges/@codemonument/event-bus-core)](https://jsr.io/@codemonument/event-bus-core)
 
 Legacy Publishes: 
-- https://deno.land/x/event_bus_core (legacy, last version published: 1.0.2)
-- npm: @codemonument/event-bus-core (cross-compiled with dnt, legacy, last version published: 1.0.2)
+- https://deno.land/x/event_bus_core (last version published: 1.0.2)
+- npm: @codemonument/event-bus-core (cross-compiled with dnt, last version published: 1.0.2)
 
 => Use JSR for latest version!
 
