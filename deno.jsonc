@@ -28,6 +28,16 @@
   "test": {
     "exclude": ["npm", ".npm"]
   },
+  "include": [
+    "deps/*",
+    "lib/*",
+    "version.ts",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "deno.jsonc",
+    "mod.ts"
+  ],
   "imports": {
     "@/": "./",
     "@mod": "./mod.ts",
