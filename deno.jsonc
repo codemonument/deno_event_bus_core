@@ -48,6 +48,7 @@
     "@deps/": "./deps/",
     "@testutils/": "./tests/_testutils/",
     "@testdata/": "./tests/_testdata/",
+    "evt": "npm:evt@^2.5.9",
     "rxjs": "npm:rxjs@7.8.1",
     "tsd": "npm:tsd@0.30.4",
     "zod": "npm:zod@^4.0.10",
