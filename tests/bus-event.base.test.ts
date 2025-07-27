@@ -3,12 +3,18 @@ import {
   expectNotAssignable,
   expectType,
 } from "@deps/npm_tsd.ts";
-import { assert, assertStrictEquals, describe, it } from "@deps/std_testing.ts";
+import { assert, assertStrictEquals } from "@std/assert";
+import { describe, it } from "@std/testing/bdd";
 
-import { BusEvent, EventualPayload, NewableBusEvent, payloadOf } from "@mod";
-import { SimpleNewable } from "@/lib/event-bus/simple-newable.type.ts";
+import type { SimpleNewable } from "@/lib/event-bus/simple-newable.type.ts";
+import type {
+  BusEvent,
+  EventualPayload,
+  NewableBusEvent,
+  payloadOf,
+} from "@mod";
 import {
-  DemoPayload,
+  type DemoPayload,
   EventWithPayload,
   ExplicitTypeEvent,
   ImplicitTypeEvent,
