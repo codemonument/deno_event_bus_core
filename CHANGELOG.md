@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 - 2025-07-27
+
+- add jsr badge to readme
+- dropping deno.land/x deployment
+
 ## 1.0.1 - 2025-07-27
 
 - first release on jsr

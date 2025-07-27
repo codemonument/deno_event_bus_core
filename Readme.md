@@ -3,11 +3,13 @@
 Event Bus Core is a library for creating event buses in Node.js and Deno. 
 Based on RXJS, with nicely typed event classes.
 
-Published to:
+Published to: [![JSR](https://jsr.io/badges/@codemonument/event-bus-core)](https://jsr.io/package/@codemonument/event-bus-core)
 
-- https://deno.land/x/event_bus_core (main target)
-- npm: @codemonument/event-bus-core (cross-compiled with dnt)
-- (jsr: @codemonument/event-bus-core directly uploaded) - WIP
+Legacy Publishes: 
+- https://deno.land/x/event_bus_core (legacy, last version published: 1.0.2)
+- npm: @codemonument/event-bus-core (cross-compiled with dnt, legacy, last version published: 1.0.2)
+
+=> Use JSR for latest version!
 
 ## How to Import in Node
 
