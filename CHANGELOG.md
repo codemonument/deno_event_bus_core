@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5 - 2025-07-27
+
+- avoid slow types
+
 ## 1.0.4 - 2025-07-27
 
 - remove dnt build script
