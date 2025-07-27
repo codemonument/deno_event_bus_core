@@ -1,22 +1,29 @@
-/**
- * Deno Config File
- * - jsonc = JSON with comments
- * - can be expanded as needed to configure integrated tsc, linter and formatter
- */
 {
-  /**
-     * Typescript Compiler Options
-     */
+  "name": "@codemonument/event-bus-core",
+  "version": "1.0.0",
+  "description": "Event Bus Core is a library for creating event buses in Node.js and Deno. Based on RXJS, with nicely typed event classes.",
+  "author": "Codemonument",
+  "license": "MIT",
+  "exports": {
+    ".": "./mod.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codemonument/event-bus-core.git"
+  },
   "lock": false,
   "compilerOptions": {
     "strict": true
   },
   "tasks": {
     "start": "deno run example/main.ts",
+    // todo: add --doc flag to test
     "test": "deno test -A",
     "testu": "deno test -A -- --update",
     "build": "deno run -A ./scripts/dnt-build.ts",
-    "publish": "npm publish ./npm --access=public && git push --tags"
+    "publish": "npm publish ./npm --access=public && git push --tags",
+		"dry": "deno publish --dry-run --allow-slow-types"
+    // note: no need for final publish step, as it's done by github actions
   },
   "test": {
     "exclude": ["npm", ".npm"]
