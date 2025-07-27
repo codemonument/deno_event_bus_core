@@ -52,7 +52,7 @@ export class EventBusRxJS {
    *
    * Returns the whole eventStream as observable.
    */
-  public get eventStream$() {
+  public get eventStream$(): Observable<unknown> {
     return this.eventStream.asObservable();
   }
 }

@@ -21,7 +21,7 @@
     // todo: add --doc flag to test
     "test": "deno test -A",
     "testu": "deno test -A -- --update",
-		"dry": "deno publish --dry-run --allow-slow-types"
+		"dry": "deno publish --dry-run"
     // note: no need for final publish step, as it's done by github actions
   },
   "test": {
