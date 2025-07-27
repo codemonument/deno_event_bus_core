@@ -1,6 +1,6 @@
 {
   "deno.enable": true,
+  "deno.disablePaths": ["playground"],
   "deno.lint": true,
-  "deno.unstable": [],
-  "deno.enablePaths": ["deps", "example", "lib", "tests", "mod.ts" ]
+  "deno.unstable": []
 }
