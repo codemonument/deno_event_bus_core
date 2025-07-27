@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4 - 2025-07-27
+
+- remove dnt build script
+
 ## 1.0.3 - 2025-07-27
 
 - fix link to jsr in badge in readme
