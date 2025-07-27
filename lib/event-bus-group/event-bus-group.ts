@@ -1,4 +1,4 @@
-import { Subscription } from "../../deps/npm_rxjs.ts";
+import { Subscription } from "npm:rxjs@7.8.1";
 import { EventBusRxJS as EventBus } from "../event-bus/event-bus.rxjs.ts";
 import {
   BusEvent,
