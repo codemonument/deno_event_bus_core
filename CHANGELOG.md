@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 - 2025-07-27
+
+- first release on jsr
+
 ## 1.0.0 - 2024-03-11
 
 - Upgrade rxjs to 7.8.1 and added it to matchers in dnt-build to be able to have it as peer dependency in the resulting package.json
