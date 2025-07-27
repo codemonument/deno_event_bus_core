@@ -49,6 +49,7 @@
     "@testutils/": "./tests/_testutils/",
     "@testdata/": "./tests/_testdata/",
     "rxjs": "npm:rxjs@7.8.1",
+    "tsd": "npm:tsd@0.30.4",
     "zod": "npm:zod@^4.0.10",
     "p-defer": "npm:p-defer@4.0.0"
   }

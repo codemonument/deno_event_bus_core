@@ -1,8 +1,4 @@
-import {
-  expectAssignable,
-  expectNotAssignable,
-  expectType,
-} from "@deps/npm_tsd.ts";
+import { expectAssignable, expectNotAssignable, expectType } from "tsd";
 import { assert, assertStrictEquals } from "@std/assert";
 import { describe, it } from "@std/testing/bdd";
 

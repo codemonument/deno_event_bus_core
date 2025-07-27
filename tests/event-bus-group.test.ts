@@ -1,7 +1,8 @@
 import { EventBusGroup, EventBusRxJS as EventBus } from "@mod";
-import { EventWithPayload, PlainEvent } from "@testdata/events.mock.ts";
-import { assertEquals, assertExists, describe, it } from "@deps/std_testing.ts";
+import { describe, it } from "@std/testing/bdd";
+import { assertEquals, assertExists } from "@std/assert";
 import { assertError } from "@testutils/assertError.ts";
+import { EventWithPayload, PlainEvent } from "@testdata/events.mock.ts";
 import pDefer from "p-defer";
 
 describe(`event-bus-group.test`, () => {

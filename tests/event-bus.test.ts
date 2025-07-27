@@ -1,17 +1,16 @@
-import { EventBusRxJS as EventBus, EventualPayload, payloadOf } from "@mod";
-import { Observable, take } from "@deps/npm_rxjs.ts";
-import { expectType } from "@deps/npm_tsd.ts";
 import {
-  assertEquals,
-  assertExists,
-  assertStrictEquals,
-  describe,
-  it,
-} from "@deps/std_testing.ts";
+  EventBusRxJS as EventBus,
+  type EventualPayload,
+  type payloadOf,
+} from "@mod";
+import { assertEquals, assertExists, assertStrictEquals } from "@std/assert";
+import { describe, it } from "@std/testing/bdd";
 import pDefer from "p-defer";
+import { type Observable, take } from "rxjs";
+import { expectType } from "tsd";
 
 import {
-  DemoPayload,
+  type DemoPayload,
   EventWithPayload,
   PlainEvent,
 } from "@testdata/events.mock.ts";
