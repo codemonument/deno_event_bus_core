@@ -1,5 +1,8 @@
 # Event Bus Core
 
+Event Bus Core is a library for creating event buses in Node.js and Deno. 
+Based on RXJS, with nicely typed event classes.
+
 Published to:
 
 - https://deno.land/x/event_bus_core (main target)
