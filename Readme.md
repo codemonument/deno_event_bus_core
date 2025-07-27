@@ -11,13 +11,13 @@ Legacy Publishes:
 
 => Use JSR for latest version!
 
-## How to Import in Node
+## How to Import in Node (TODO: change for JSR)
 
 ```ts
 import {EventBusRxJS as EventBus} from '@codemonument/event-bus-core';
 ```
 
-## How to Import in Deno
+## How to Import in Deno (TODO: change for JSR)	
 
 Note: Use import url with specific version in production to avoid sudden breaking changes.
 
