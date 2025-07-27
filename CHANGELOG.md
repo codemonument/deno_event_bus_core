@@ -3,6 +3,7 @@
 ## 1.0.4 - 2025-07-27
 
 - remove dnt build script
+- migrate from ./deps to jsr imports
 
 ## 1.0.3 - 2025-07-27
 
