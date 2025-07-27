@@ -3,7 +3,7 @@
 Event Bus Core is a library for creating event buses in Node.js and Deno. 
 Based on RXJS, with nicely typed event classes.
 
-Published to: [![JSR](https://jsr.io/badges/@codemonument/event-bus-core)](https://jsr.io/package/@codemonument/event-bus-core)
+Published to (click badge to view): [![JSR](https://jsr.io/badges/@codemonument/event-bus-core)](https://jsr.io/@codemonument/event-bus-core)
 
 Legacy Publishes: 
 - https://deno.land/x/event_bus_core (legacy, last version published: 1.0.2)
@@ -11,24 +11,37 @@ Legacy Publishes:
 
 => Use JSR for latest version!
 
-## How to Import in Node (TODO: change for JSR)
+## How to Install
+
+- see: https://jsr.io/@codemonument/event-bus-core 
+- on the right side: select your package manager and copy the install command
+
+For example, in Node.js:
+```bash
+npx jsr add @codemonument/event-bus-core
+
+# with version
+npx jsr add @codemonument/event-bus-core@1.0.3
+```
+
+For example, in Deno:
+```bash
+deno add jsr:@codemonument/event-bus-core
+
+# with version
+deno add jsr:@codemonument/event-bus-core@1.0.3
+```
+
+## How to Import (in Deno, Node and Bun)
 
 ```ts
 import {EventBusRxJS as EventBus} from '@codemonument/event-bus-core';
 ```
 
-## How to Import in Deno (TODO: change for JSR)	
-
-Note: Use import url with specific version in production to avoid sudden breaking changes.
-
-```ts
-import {EventBusRxJS as EventBus} from 'https://deno.land/x/event_bus_core/mod.ts';
-```
-
 ## Usage
 
 ```ts
-import {EventBusRxJS as EventBus} from 'https://deno.land/x/event_bus_core';
+import {EventBusRxJS as EventBus} from '@codemonument/event-bus-core';
 
 // Create new EventBus instance
 const bus = new EventBus();
@@ -105,13 +118,19 @@ export class ExplicitTypeEvent extends BusEvent<void> {
 - pro: standardised spec
 - contra: more difficult to have one stream be sent to mutliple listeners and correctly closing all of them
 
-## Repo Log
+--- 
 
-### 2022-11-14
+# Repo Log
+
+## 2025-07-27
+
+- add deployment to jsr.io and optimize readme, examples, tests and playgrounds
+
+## 2022-11-14
 
 - Compilation for npm works now with dnt! https://github.com/denoland/dnt
 - Setup deployment to deno.land/x & npmjs.org
 
-### 2022-09-05
+## 2022-09-05
 
 - Templated from https://github.com/codemonument/deno-module-template/commit/beb8dab612b9c71a7772064353fcd5e2ca9ecd85

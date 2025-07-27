@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 - 2025-07-27
+
+- fix link to jsr in badge in readme
+- update install instructions in readme
+
 ## 1.0.2 - 2025-07-27
 
 - add jsr badge to readme
