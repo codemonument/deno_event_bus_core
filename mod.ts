@@ -13,8 +13,3 @@ export * from "./lib/event-bus/event-bus.rxjs.ts";
 // Event-Bus-Group Section
 export * from "./lib/event-bus-group/event-bus-group.ts";
 export * from "./lib/event-bus-group/event-group-callback.type.ts";
-
-/**
- * CAUTION: evt event bus Heavily work in progress!
- */
-// export * from "./lib/event-bus/event-bus.evt.ts";

@@ -105,17 +105,9 @@ export class ExplicitTypeEvent extends BusEvent<void> {
 
 ## Considerations
 
-## Switching from rxjs to evt
-
-- pro: no rxjs dependency
-- contra: weird evt dependency typings (cross-compiled to deno from node via Denoify)
-- steps:
-  1. Add Evt as dependency in importMap
-  2. Rewrite rxjs usages to evt
-
 ## Switchting to standard Webstreams
 
-- pro: standardised spec
+- pro: standardised spec^
 - contra: more difficult to have one stream be sent to mutliple listeners and correctly closing all of them
 
 --- 
