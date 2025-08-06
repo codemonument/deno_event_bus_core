@@ -62,6 +62,18 @@ export class EventBusRxJS {
     return this.eventStream.asObservable();
   }
 
+  /**
+   * @returns The whole eventStream as async iterable.
+   *          This is useful for using the event stream in for-await-of loops.
+   *
+   * @example
+   * ```ts
+   * const asyncIterable = ebus.eventStreamAsAsyncIterable();
+   * for await (const event of asyncIterable) {
+   *   console.log(event);
+   * }
+   * ```
+   */
   public eventStreamAsAsyncIterable() {
     const iteratorStream = asyncIteratorFromRx(this.eventStream);
     return iteratorStream;
