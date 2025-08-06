@@ -1,5 +1,5 @@
 import {
-  BusEvent,
+  type BusEvent,
   EventBusRxJS as EventBus,
   type EventualPayload,
   type payloadOf,
