@@ -1,6 +1,6 @@
 {
   "name": "@codemonument/event-bus-core",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Event Bus Core is a library for creating event buses in Node.js and Deno. Based on RXJS, with nicely typed event classes.",
   "author": "Codemonument",
   "license": "MIT",
