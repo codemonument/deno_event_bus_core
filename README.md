@@ -78,7 +78,7 @@ sub1.unsubscribe();
 sub2.unsubscribe();
 ```
 
-## CAUTION: Branding BusEvents
+## CAUTION: Use Branding for BusEvents with same payload type!
 
 NOTE: If you have two or more events with the same payload type, YOU SHOULD
 BRAND THEM! This avoids incomplete IDE type checks and runtime errors due to the
@@ -118,6 +118,8 @@ const ebus = new EventBus<MyEvent>();
 // and MyEvent and MyOtherEvent are different types due to the branding
 ebus.on$(MyOtherEvent).subscribe(() => {});
 ```
+
+## Note: You don't need branding if all your events have different payload types!
 
 ## Advanced Usages
 
