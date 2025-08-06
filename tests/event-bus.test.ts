@@ -61,4 +61,35 @@ describe("EventBus", () => {
     ebus.emit(demoEventInstance);
     await done.promise;
   });
+
+  it("should send and receive events as async iterable", async () => {
+    const ebus = new EventBus();
+    const demoEventInstance = new PlainEvent();
+
+    // Emit events after some time to test async iterable
+    setTimeout(() => {
+      ebus.emit(demoEventInstance);
+      ebus.emit(demoEventInstance);
+      ebus.emit(demoEventInstance);
+    }, 100);
+
+    const expectedEventCount = 3;
+    let currentEventCount = 0;
+
+    const asyncIterable = ebus.eventStreamAsAsyncIterable();
+    const receivedEvents: unknown[] = [];
+
+    for await (const event of asyncIterable) {
+      receivedEvents.push(event);
+      currentEventCount++;
+      if (currentEventCount === expectedEventCount) {
+        break;
+      }
+    }
+
+    assertStrictEquals(receivedEvents.length, 3);
+    assertStrictEquals(receivedEvents[0], demoEventInstance);
+    assertStrictEquals(receivedEvents[1], demoEventInstance);
+    assertStrictEquals(receivedEvents[2], demoEventInstance);
+  });
 });
