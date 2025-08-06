@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0 - 2025-08-06
+
+- add eventStreamAsAsyncIterable() to EventBusRxJS
+- remove abandoned evt event emitter (was never working)
+
 ## 1.0.5 - 2025-07-27
 
 - avoid slow types
