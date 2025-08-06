@@ -107,7 +107,7 @@ export class ExplicitTypeEvent extends BusEvent<void> {
 
 ## Switchting to standard Webstreams
 
-- pro: standardised spec^
+- pro: standardised spec
 - contra: more difficult to have one stream be sent to mutliple listeners and correctly closing all of them
 
 --- 
