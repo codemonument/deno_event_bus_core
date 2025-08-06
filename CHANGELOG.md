@@ -1,9 +1,15 @@
 # Changelog
 
-## 1.1.0 - 2025-08-06
+## 1.1.1 - 2025-08-06
+
+- re-release of 1.1.0, but with a fix for the type issues
+
+## 1.1.0 - 2025-08-06 - not published due to slow type issues
 
 - add eventStreamAsAsyncIterable() to EventBusRxJS
-- remove abandoned evt event emitter (was never working)
+- remove abandoned evt event emitter (never worked)
+- add TAllowedEvents type parameter to EventBusRxJS, to restrict the events that can be emitted and received
+- add tests for this new TAllowedEvents type parameter
 
 ## 1.0.5 - 2025-07-27
 
