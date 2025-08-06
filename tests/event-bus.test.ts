@@ -248,19 +248,32 @@ describe("EventBus with specified allowed events", () => {
   });
 
   // WIP
-  it("should not accept other payload-less events than 'PlainEvent'", () => {
-    const restrictedBus = new EventBus<PlainEvent>();
+  it("should not accept multiple payload-less events with branded events", () => {
+    class AllowedPlainEvent extends BusEvent<void, "AllowedPlainEvent"> {}
+    class UnallowedPlainEvent extends BusEvent<void, "UnallowedPlainEvent"> {}
 
-    class _UnallowedPlainEvent extends BusEvent<void> {}
+    const restrictedBus = new EventBus<AllowedPlainEvent>();
+
+    // Uncomment the line below to test manually, the deno linter will complain.
+    // restrictedBus.on$(UnallowedPlainEvent);
 
     expectNotAssignable<Parameters<typeof restrictedBus.on$>[0]>(
-      _UnallowedPlainEvent,
+      UnallowedPlainEvent,
     );
 
     // Anti-Check to validate this test itself
     // If you uncomment this, the deno linter will complain.
-    expectAssignable<Parameters<typeof restrictedBus.on$>[0]>(
-      _UnallowedPlainEvent,
+    // expectAssignable<Parameters<typeof restrictedBus.on$>[0]>(
+    //   UnallowedPlainEvent,
+    // );
+
+    restrictedBus.emit(new AllowedPlainEvent());
+
+    expectNotAssignable<Parameters<typeof restrictedBus.emit>[0]>(
+      new UnallowedPlainEvent(),
+    );
+    expectAssignable<Parameters<typeof restrictedBus.emit>[0]>(
+      new AllowedPlainEvent(),
     );
   });
 });
