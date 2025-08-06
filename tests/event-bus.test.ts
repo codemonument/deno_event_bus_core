@@ -16,6 +16,7 @@ import {
   PlainEvent,
 } from "@testdata/events.mock.ts";
 
+// --- TESTS FOR EVENT BUS WITH ANY "BusEvent<unknown>" ALLOWED ---
 describe("EventBus", () => {
   it("should instantiate EventBus", () => {
     assertExists(new EventBus());
@@ -98,5 +99,30 @@ describe("EventBus", () => {
     assertStrictEquals(receivedEvents[0], demoEventInstance);
     assertStrictEquals(receivedEvents[1], demoEventInstance);
     assertStrictEquals(receivedEvents[2], demoEventInstance);
+  });
+});
+
+// --- TESTS FOR EVENT BUS WITH SPECIFIED ALLOWED EVENTS ---
+describe("EventBus with specified allowed events", () => {
+  it("should instantiate EventBus with specified allowed events", () => {
+    const ebus = new EventBus<PlainEvent | EventWithPayload>();
+    assertExists(ebus);
+    const eventStream = ebus.eventStreamAsObservable();
+    expectType<Observable<PlainEvent | EventWithPayload>>(eventStream);
+  });
+
+  it("should send and receive events of specified allowed events", async () => {
+    const done = pDefer();
+    const ebus = new EventBus<PlainEvent | EventWithPayload>();
+    const payload: DemoPayload = { name: "Bob" };
+
+    ebus.on$(EventWithPayload).pipe(take(1)).subscribe((received) => {
+      assertStrictEquals(received.name, "Bob");
+      assertEquals(received, payload);
+      done.resolve();
+    });
+
+    ebus.emit(new EventWithPayload(payload));
+    await done.promise;
   });
 });

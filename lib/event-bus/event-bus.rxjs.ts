@@ -42,7 +42,7 @@ export class EventBusRxJS<
   }
 
   /**
-   * I push the given event onto the message bus.
+   * Pushes the given event onto the message bus.
    *
    * @param event
    */
