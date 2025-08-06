@@ -21,6 +21,7 @@
     // todo: add --doc flag to test
     "test": "deno test -A",
     "testu": "deno test -A -- --update",
+    "testw": "deno test -A --watch",
 		"dry": "deno publish --dry-run"
     // note: no need for final publish step, as it's done by github actions
   },
