@@ -1,6 +1,8 @@
 /**
  * When P = void, resulting type MUST be void, otherwise typescript forces the user
  * to input a payload param when instantiating a child class of BusEvent
+ *
+ * Used in the constructor of BusEvent to signify that a class might take an argument for payload data.
  */
 export type EventualPayload<P> = P extends void ? void : P;
 
@@ -11,11 +13,9 @@ export type EventualPayload<P> = P extends void ? void : P;
  * This class has been called 'Event' in original Article.
  *
  * It also allows for a payload being passed into into it.
- * Can be disabled when not needed by simply extending like this with `void`:
+ * Can be disabled when not needed by simply using it with `void` as the type argument:
  *
- * class EventWithoutPayload extends BusEvent<void> {
- *   public type = "EventWithoutPayload";
- * }
+ * class EventWithoutPayload extends BusEvent<void> {}
  *
  * @type payloadType
  * === generic payload type - small name, bc. it's a variable for a type
@@ -32,12 +32,20 @@ export abstract class BusEvent<payloadType> {
  * More Infos:
  * https://stackoverflow.com/questions/70472192/extract-first-generic-argument-from-type
  */
-export type ExtractGenericArgument<T> = T extends BusEvent<infer Generic>
-  ? Generic
+export type ExtractGenericArgument<T> = T extends BusEvent<infer TPayload>
+  ? TPayload
   : unknown;
 
 /**
- * Simplified ExtractGenericArgument<eventType> expression
+ * Simplified ExtractGenericArgument<eventType> expression, basically just an alias
+ *
+ * @example
+ * ```ts ignore
+ * import { expectType } from "tsd";
+ *
+ * class StringBusEvent extends BusEvent<string> {}
+ * payloadOf<StringBusEvent> // => string
+ * ```
  */
 export type payloadOf<eventType> = ExtractGenericArgument<eventType>;
 
@@ -45,7 +53,7 @@ export type payloadOf<eventType> = ExtractGenericArgument<eventType>;
  * Allows to ensure, that a certain type
  * - can be instantiated with calling `new`
  *   (this is needed to be able to use the type in question with `instanceof`)
- * - has a parameter `payload` which is of type P, unles
+ * - has a parameter `payload` which is of type P, unless
  * - P is `void`, in this case it's not allowed to pass anything to this constructor!
  *   (expressed via the conditional `never` type)
  *
@@ -62,13 +70,23 @@ export type payloadOf<eventType> = ExtractGenericArgument<eventType>;
  */
 
 export interface NewableBusEvent<
-  eventType extends BusEvent<payloadOf<eventType>>,
+  TBusEvent extends BusEvent<payloadOf<TBusEvent>>,
 > {
-  // payloadType - Define that the constructor gets a Payload
-  // Type of the payload is not so clear here,
-  // could be of type EventualPayload<P>
-  // or simply type: payloadType
-  new <payloadType extends payloadOf<eventType>>(
-    payload: payloadType,
-  ): eventType;
+  /**
+   * @param payload - The payload of the event. Typed to TPayload, extracted from TBusEvent
+   */
+  new <TPayload extends payloadOf<TBusEvent>>(
+    payload: TPayload,
+  ): TBusEvent;
 }
+
+// -- EXPERIMENTAL: NEW HELPER TYPES FOR CONSTRAINING THE ALLOWED EVENTS ON AN EVENT BUS --
+
+// Helper: Extract the constructor for a single event type
+type EventConstructorFor<E extends BusEvent<unknown>> = new (
+  payload: payloadOf<E>,
+) => E;
+
+// Helper: For a union of events, get a union of their constructors
+type EventConstructors<T extends BusEvent<unknown>> = T extends
+  BusEvent<unknown> ? EventConstructorFor<T> : never;
