@@ -1,4 +1,5 @@
 import {
+  BusEvent,
   EventBusRxJS as EventBus,
   type EventualPayload,
   type payloadOf,
@@ -18,6 +19,12 @@ import {
 describe("EventBus", () => {
   it("should instantiate EventBus", () => {
     assertExists(new EventBus());
+  });
+
+  it("should have BusEvent<unknown> as default EventList type", () => {
+    const ebus = new EventBus();
+    const eventStream = ebus.eventStreamAsObservable();
+    expectType<Observable<BusEvent<unknown>>>(eventStream);
   });
 
   it("should send and receive (paramless) demo event", async () => {
