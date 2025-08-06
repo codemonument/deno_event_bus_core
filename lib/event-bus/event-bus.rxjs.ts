@@ -76,7 +76,7 @@ export class EventBusRxJS<
    * }
    * ```
    */
-  public eventStreamAsAsyncIterable() {
+  public eventStreamAsAsyncIterable(): AsyncIterable<TAllowedEvents> {
     const iteratorStream = asyncIteratorFromRx(this.eventStream);
     return iteratorStream;
   }
