@@ -1,8 +1,13 @@
 /**
  * When P = void, resulting type MUST be void, otherwise typescript forces the user
- * to input a payload param when instantiating a child class of BusEvent
+ * to input a payload param when instantiating a child class of BusEvent.
  *
  * Used in the constructor of BusEvent to signify that a class might take an argument for payload data.
+ *
+ * Caution: do not use 'never' instead of 'void' to even forbid passing "undefined" explicitly,
+ * since this forces users to input something here:
+ * class PlainEvent extends BusEvent<void>{}
+ * const event = new PlainEvent(~~~); // <- this is not allowed, since undefined is not assignable to never
  */
 export type EventualPayload<P> = P extends void ? void : P;
 
@@ -16,15 +21,11 @@ export type EventualPayload<P> = P extends void ? void : P;
  * Can be disabled when not needed by simply using it with `void` as the type argument:
  *
  * class EventWithoutPayload extends BusEvent<void> {}
- *
- * @type payloadType
- * === generic payload type - small name, bc. it's a variable for a type
- * === "type variable" for the typescript type of the payload incomming into the constructor.
  */
-export abstract class BusEvent<payloadType> {
+export abstract class BusEvent<TPayload> {
   // This property will be filled with the name of the class extending this base
   public readonly type: string = this.constructor.name;
-  constructor(public readonly payload: EventualPayload<payloadType>) {}
+  constructor(public readonly payload: EventualPayload<TPayload>) {}
 }
 
 /**

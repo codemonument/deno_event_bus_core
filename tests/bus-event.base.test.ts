@@ -24,6 +24,9 @@ describe(`EventualPayload`, () => {
   it(`should accept assigning undefined to EventualPayload<void>`, () => {
     expectAssignable<EventualPayload<void>>(undefined);
   });
+  it(`should not accept assigning some object to EventualPayload<void>`, () => {
+    expectNotAssignable<EventualPayload<void>>({});
+  });
 });
 
 describe(`bus-event.type`, () => {
@@ -39,14 +42,12 @@ describe(`bus-event.type`, () => {
     // Type Expectations
     expectType<void>(event.payload);
     expectType<string>(event.type);
-    // TODO: Test while using this event bus library, whether defining event.payload as void is enough
-    // or if assignability to undefined is very useful
     expectNotAssignable<undefined>(event.payload);
   });
 
   /**
    * IF EventWithPayload extends BusEvent with any other type than void (let's call it T),
-   * the user of EventWithpayload is forced to provide a value of type T.
+   * the user of EventWithPayload is forced to provide a value of type T.
    */
   it(`should allow event construction with payload (=any)`, () => {
     const payload: DemoPayload = { name: "Bob" };
