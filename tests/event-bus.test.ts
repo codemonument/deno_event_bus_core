@@ -1,5 +1,5 @@
 import {
-  type BusEvent,
+  BusEvent,
   EventBusRxJS as EventBus,
   type EventualPayload,
   type payloadOf,
@@ -8,7 +8,12 @@ import { assertEquals, assertExists, assertStrictEquals } from "@std/assert";
 import { describe, it } from "@std/testing/bdd";
 import pDefer from "p-defer";
 import { type Observable, take } from "rxjs";
-import { expectType } from "tsd";
+import {
+  expectAssignable,
+  expectNotAssignable,
+  expectNotType,
+  expectType,
+} from "tsd";
 
 import {
   type DemoPayload,
@@ -124,5 +129,72 @@ describe("EventBus with specified allowed events", () => {
 
     ebus.emit(new EventWithPayload(payload));
     await done.promise;
+  });
+
+  it("should not allow listening to events that are not specified in TAllowedEvents", () => {
+    const ebus = new EventBus<PlainEvent | EventWithPayload>();
+    class _UnallowedEvent extends BusEvent<void> {}
+
+    // The event stream observable should only contain allowed event types
+    expectNotType<Observable<_UnallowedEvent>>(ebus.eventStreamAsObservable());
+    expectType<Observable<PlainEvent | EventWithPayload>>(
+      ebus.eventStreamAsObservable(),
+    );
+
+    // But we should be able to listen to allowed events
+    expectType<Observable<void>>(ebus.on$(PlainEvent));
+    expectType<Observable<DemoPayload>>(ebus.on$(EventWithPayload));
+  });
+
+  it("should only accept 'PlainEvent' in on$ method, not 'EventWithPayload'", () => {
+    // Create an EventBus that only allows PlainEvent
+    const restrictedBus = new EventBus<PlainEvent>();
+
+    // This should work - PlainEvent is allowed
+    expectType<Observable<void>>(restrictedBus.on$(PlainEvent));
+
+    // Tests:
+    // restrictedBus.on$(EventWithPayload);
+    // (uncomment the line above to test manually)
+    expectNotAssignable<Parameters<typeof restrictedBus.on$>[0]>(
+      EventWithPayload,
+    );
+    expectAssignable<Parameters<typeof restrictedBus.on$>[0]>(
+      PlainEvent,
+    );
+    // This is the check to test whether the test itself is working.
+    // If you uncomment this, the deno linter will complain.
+    // expectAssignable<Parameters<typeof restrictedBus.on$>[0]>(
+    //   EventWithPayload,
+    // );
+
+    class _UnallowedStringEvent extends BusEvent<string> {}
+
+    // Tests:
+    // restrictedBus.on$(_UnallowedStringEvent);
+    // (uncomment the line above to test manually)
+
+    // restrictedBus.on$(_UnallowedStringEvent); // Error: UnallowedStringEvent is not assignable to PlainEvent
+
+    // The event stream should only contain PlainEvent
+    expectType<Observable<PlainEvent>>(restrictedBus.eventStreamAsObservable());
+    expectNotType<Observable<EventWithPayload>>(
+      restrictedBus.eventStreamAsObservable(),
+    );
+  });
+
+  it("should not accept BusEvent<string> in on$ method when TAllowedEvents is PlainEvent", () => {
+    const restrictedBus = new EventBus<PlainEvent>();
+
+    class _UnallowedStringEvent extends BusEvent<string> {}
+
+    expectNotAssignable<Parameters<typeof restrictedBus.on$>[0]>(
+      _UnallowedStringEvent,
+    );
+    // Anti-Check to validate this test itself
+    // If you uncomment this, the deno linter will complain.
+    // expectAssignable<Parameters<typeof restrictedBus.on$>[0]>(
+    //   _UnallowedStringEvent,
+    // );
   });
 });

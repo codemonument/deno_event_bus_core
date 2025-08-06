@@ -22,7 +22,7 @@ export class EventBusRxJS<
    * @returns either the Event E or the Payload of E, typed P
    * Note: These types do not be passed manually, they will be inferenced by TS
    */
-  public on$<E extends BusEvent<payloadOf<E>>>(
+  public on$<E extends TAllowedEvents & BusEvent<payloadOf<E>>>(
     typeFilter: NewableBusEvent<E>,
   ): Observable<EventualPayload<payloadOf<E>>> {
     return this.eventStream.pipe(
