@@ -81,6 +81,11 @@ export interface NewableBusEvent<
   ): TBusEvent;
 }
 
+/**
+ * A type that matches any BusEvent, regardless of the payload type.
+ */
+export type AnyBusEvent = BusEvent<unknown>;
+
 // -- EXPERIMENTAL: NEW HELPER TYPES FOR CONSTRAINING THE ALLOWED EVENTS ON AN EVENT BUS --
 
 // Helper: Extract the constructor for a single event type
