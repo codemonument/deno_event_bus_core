@@ -5,6 +5,7 @@ import type {
   NewableBusEvent,
   payloadOf,
 } from "./bus-event.base.ts";
+import { asyncIteratorFromRx } from "async-iterator-from-rx";
 
 export class EventBusRxJS {
   private eventStream: Subject<unknown> = new Subject<unknown>();
@@ -50,9 +51,19 @@ export class EventBusRxJS {
   /**
    * CAUTION: PLEASE BE SURE WHAT YOU DO WHEN YOU USE THIS!
    *
-   * Returns the whole eventStream as observable.
+   * @returns The whole eventStream as rxjs observable.
+   * @deprecated Use eventStreamAsObservable() instead
    */
   public get eventStream$(): Observable<unknown> {
     return this.eventStream.asObservable();
+  }
+
+  public eventStreamAsObservable(): Observable<unknown> {
+    return this.eventStream.asObservable();
+  }
+
+  public eventStreamAsAsyncIterable() {
+    const iteratorStream = asyncIteratorFromRx(this.eventStream);
+    return iteratorStream;
   }
 }
