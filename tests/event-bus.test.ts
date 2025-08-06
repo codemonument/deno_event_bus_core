@@ -7,7 +7,7 @@ import {
 import { assertEquals, assertExists, assertStrictEquals } from "@std/assert";
 import { describe, it } from "@std/testing/bdd";
 import pDefer from "p-defer";
-import { type Observable, take } from "rxjs";
+import { type Observable, take, timeout, TimeoutError } from "rxjs";
 import {
   expectAssignable,
   expectNotAssignable,
@@ -215,6 +215,36 @@ describe("EventBus with specified allowed events", () => {
     expectNotAssignable<AllowedEvent>(new UnallowedEvent());
     // Uncomment the line below to test manually, the deno linter will complain.
     // ebus.emit(new UnallowedEvent());
+  });
+
+  it("should correctly filter events in on$ even with unbranded events", async () => {
+    const done = pDefer();
+    const ebus = new EventBus<PlainEvent>();
+    class _UnallowedEvent extends BusEvent<void> {}
+    const listener = ebus.on$(_UnallowedEvent).pipe(take(1), timeout(500))
+      .subscribe({
+        next: () => {
+          done.reject(
+            "Expected to not receive an event due to filtering on an _UnallowedEvent, but got one",
+          );
+        },
+        error: (error) => {
+          if (error instanceof TimeoutError) {
+            done.resolve();
+          } else {
+            done.reject(error);
+          }
+        },
+        complete: () => {
+          done.reject(
+            new Error("Expected to receive an event, but got nothing"),
+          );
+        },
+      });
+
+    ebus.emit(new PlainEvent());
+
+    await done.promise;
   });
 
   // WIP
