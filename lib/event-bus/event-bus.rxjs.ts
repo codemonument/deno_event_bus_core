@@ -39,21 +39,21 @@ export class EventBusRxJS<
    * @returns either the Event E or the Payload of E, typed P
    * Note: These types do not be passed manually, they will be inferenced by TS
    */
-  public on$<E extends TAllowedEvents & BusEvent<payloadOf<E>>>(
-    typeFilter: NewableBusEvent<E>,
-  ): Observable<EventualPayload<payloadOf<E>>> {
+  public on$<TBusEvent extends TAllowedEvents & BusEvent<payloadOf<TBusEvent>>>(
+    typeFilter: NewableBusEvent<TBusEvent>,
+  ): Observable<EventualPayload<payloadOf<TBusEvent>>> {
     return this.eventStream.pipe(
       // Filters all events on the event stream and returns only these, which map the typeFilter
-      filter((event: unknown): event is E => {
+      filter((event: unknown): event is TBusEvent => {
         return event instanceof typeFilter;
       }),
       // Maps the events to their payloads for easier consumption
       // Note: The return type must be EventualPayload here
       //       to not get `P | undefined` as return type of this map
-      map((event: E) =>
+      map((event: TBusEvent) =>
         event.payload !== undefined
           ? event.payload
-          : (undefined as EventualPayload<payloadOf<E>>)
+          : (undefined as EventualPayload<payloadOf<TBusEvent>>)
       ),
     );
   }
