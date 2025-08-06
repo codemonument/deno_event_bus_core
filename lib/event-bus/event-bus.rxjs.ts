@@ -7,8 +7,10 @@ import type {
 } from "./bus-event.base.ts";
 import { asyncIteratorFromRx } from "async-iterator-from-rx";
 
-export class EventBusRxJS {
-  private eventStream: Subject<unknown> = new Subject<unknown>();
+export class EventBusRxJS<
+  TAllowedEvents extends BusEvent<unknown> = BusEvent<unknown>,
+> {
+  private eventStream: Subject<TAllowedEvents> = new Subject<TAllowedEvents>();
 
   // --- PUBLIC FUNCTIONS ---
 
@@ -31,7 +33,7 @@ export class EventBusRxJS {
       // Maps the events to their payloads for easier consumption
       // Note: The return type must be EventualPayload here
       //       to not get `P | undefined` as return type of this map
-      map((event: any) =>
+      map((event: E) =>
         event.payload !== undefined
           ? event.payload
           : (undefined as EventualPayload<payloadOf<E>>)
@@ -44,7 +46,7 @@ export class EventBusRxJS {
    *
    * @param event
    */
-  public emit(event: unknown): void {
+  public emit(event: TAllowedEvents): void {
     this.eventStream.next(event);
   }
 
@@ -54,11 +56,11 @@ export class EventBusRxJS {
    * @returns The whole eventStream as rxjs observable.
    * @deprecated Use eventStreamAsObservable() instead
    */
-  public get eventStream$(): Observable<unknown> {
+  public get eventStream$(): Observable<TAllowedEvents> {
     return this.eventStream.asObservable();
   }
 
-  public eventStreamAsObservable(): Observable<unknown> {
+  public eventStreamAsObservable(): Observable<TAllowedEvents> {
     return this.eventStream.asObservable();
   }
 

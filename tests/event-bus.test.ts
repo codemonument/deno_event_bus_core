@@ -21,7 +21,7 @@ describe("EventBus", () => {
     assertExists(new EventBus());
   });
 
-  it("should have BusEvent<unknown> as default EventList type", () => {
+  it("should have BusEvent<unknown> as default TAllowedEvents type", () => {
     const ebus = new EventBus();
     const eventStream = ebus.eventStreamAsObservable();
     expectType<Observable<BusEvent<unknown>>>(eventStream);
