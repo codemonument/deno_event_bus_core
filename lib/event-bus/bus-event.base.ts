@@ -89,10 +89,11 @@ export type AnyBusEvent = BusEvent<unknown>;
 // -- EXPERIMENTAL: NEW HELPER TYPES FOR CONSTRAINING THE ALLOWED EVENTS ON AN EVENT BUS --
 
 // Helper: Extract the constructor for a single event type
-type EventConstructorFor<E extends BusEvent<unknown>> = new (
+type EventConstructorFor<E extends AnyBusEvent> = new (
   payload: payloadOf<E>,
 ) => E;
 
 // Helper: For a union of events, get a union of their constructors
-type EventConstructors<T extends BusEvent<unknown>> = T extends
-  BusEvent<unknown> ? EventConstructorFor<T> : never;
+type EventConstructors<T extends AnyBusEvent> = T extends AnyBusEvent
+  ? EventConstructorFor<T>
+  : never;
