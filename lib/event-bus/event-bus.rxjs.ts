@@ -1,5 +1,6 @@
 import { filter, map, type Observable, Subject } from "rxjs";
 import type {
+  AnyBusEvent,
   BusEvent,
   EventualPayload,
   NewableBusEvent,
@@ -7,8 +8,24 @@ import type {
 } from "./bus-event.base.ts";
 import { asyncIteratorFromRx } from "async-iterator-from-rx";
 
+/**
+ * @type TAllowedEvents
+ *   - The type of events that are allowed to be emitted on this event bus.
+ *
+ *   - Defaults to AnyBusEvent, which means BusEvent<unknown>.
+ *     The Bus can then be subscribed with on$(~Any Class instance assignable to BusEvent<unknown>~)
+ *
+ *   - If you want to be more specific, you can use a union of BusEvent types, e.g.
+ *     MyStringEvent extends BusEvent<string>{}
+ *     MyNumberEvent extends BusEvent<number>{}
+ *     MyPayloadEvent extends BusEvent<{
+ *       name: string;
+ *       age: number;
+ *     }>{}
+ *     new EventBusRxJS<MyStringEvent | MyNumberEvent | MyPayloadEvent>
+ */
 export class EventBusRxJS<
-  TAllowedEvents extends BusEvent<unknown> = BusEvent<unknown>,
+  TAllowedEvents extends AnyBusEvent = AnyBusEvent,
 > {
   private eventStream: Subject<TAllowedEvents> = new Subject<TAllowedEvents>();
 
