@@ -21,10 +21,39 @@ export type EventualPayload<P> = P extends void ? void : P;
  * Can be disabled when not needed by simply using it with `void` as the type argument:
  *
  * class EventWithoutPayload extends BusEvent<void> {}
+ *
+ * CAUTION: If you define two Events with no payload, the typings are not enough to distinguish between them
+ *          for defining TAllowedEvents on EventBusRxJS.
+ *          You need to use a brand to allow TS to distinguish between them.
+ *
+ * @example
+ * ```ts ignore
+ * class MyEvent extends BusEvent<void> {}
+ * class MyOtherEvent extends BusEvent<void> {}
+ *
+ * const event = new MyEvent();
+ * const otherEvent = new MyOtherEvent();
+ *
+ * const ebus = new EventBusRxJS<MyEvent>();
+ * ebus.emit(otherEvent); // this should not be allowed, since MyEvent and MyOtherEvent are not the same type,
+ *                           but TS treats them as the same type here, because they both extend BusEvent<void>
+ *
+ * TO AVOID THIS: Use branding to distinguish between the two events.
+ *
+ * class MyEvent extends BusEvent<void, "MyEvent"> {}
+ * class MyOtherEvent extends BusEvent<void, "MyOtherEvent"> {}
+ *
+ * const event = new MyEvent();
+ * const otherEvent = new MyOtherEvent();
+ *
+ * const ebus = new EventBusRxJS<MyEvent>();
+ * ebus.emit(otherEvent); // this should now be allowed, since MyEvent and MyOtherEvent are now different types
+ * ```
  */
-export abstract class BusEvent<TPayload> {
+export abstract class BusEvent<TPayload, TBrand = unknown> {
   // This property will be filled with the name of the class extending this base
   public readonly type: string = this.constructor.name;
+  protected readonly __brand!: TBrand;
   constructor(public readonly payload: EventualPayload<TPayload>) {}
 }
 

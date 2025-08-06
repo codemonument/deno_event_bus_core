@@ -36,7 +36,6 @@ export class EventBusRxJS<
    * @param typeFilter The event type to listen to
    *        must extend from BusEvent<R>
    *
-   * @returns either the Event E or the Payload of E, typed P
    * Note: These types do not be passed manually, they will be inferenced by TS
    */
   public on$<TBusEvent extends TAllowedEvents & BusEvent<payloadOf<TBusEvent>>>(

@@ -198,6 +198,25 @@ describe("EventBus with specified allowed events", () => {
     // );
   });
 
+  it("should allow emitting two events extending BusEvent<void> even though one is not in TAllowedEvents", () => {
+    const ebus = new EventBus<PlainEvent>();
+    class _UnallowedEvent extends BusEvent<void> {}
+
+    ebus.emit(new _UnallowedEvent());
+    ebus.emit(new PlainEvent());
+  });
+
+  it("should disallow emitting two events extending BusEvent<void> with branded events", () => {
+    class AllowedEvent extends BusEvent<void, "AllowedEvent"> {}
+    class UnallowedEvent extends BusEvent<void, "UnallowedEvent"> {}
+    const ebus = new EventBus<AllowedEvent>();
+
+    ebus.emit(new AllowedEvent());
+    expectNotAssignable<AllowedEvent>(new UnallowedEvent());
+    // Uncomment the line below to test manually, the deno linter will complain.
+    // ebus.emit(new UnallowedEvent());
+  });
+
   // WIP
   it("should not accept other payload-less events than 'PlainEvent'", () => {
     const restrictedBus = new EventBus<PlainEvent>();
