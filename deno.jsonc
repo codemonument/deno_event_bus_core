@@ -52,6 +52,7 @@
     "rxjs": "npm:rxjs@7.8.1",
     "tsd": "npm:tsd@0.30.4",
     "zod": "npm:zod@^4.0.10",
-    "p-defer": "npm:p-defer@4.0.0"
+    "p-defer": "npm:p-defer@4.0.0", 
+    "async-iterator-from-rx": "npm:async-iterator-from-rx@^1.0.0"
   }
 }
