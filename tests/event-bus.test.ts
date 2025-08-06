@@ -197,4 +197,21 @@ describe("EventBus with specified allowed events", () => {
     //   _UnallowedStringEvent,
     // );
   });
+
+  // WIP
+  it("should not accept other payload-less events than 'PlainEvent'", () => {
+    const restrictedBus = new EventBus<PlainEvent>();
+
+    class _UnallowedPlainEvent extends BusEvent<void> {}
+
+    expectNotAssignable<Parameters<typeof restrictedBus.on$>[0]>(
+      _UnallowedPlainEvent,
+    );
+
+    // Anti-Check to validate this test itself
+    // If you uncomment this, the deno linter will complain.
+    expectAssignable<Parameters<typeof restrictedBus.on$>[0]>(
+      _UnallowedPlainEvent,
+    );
+  });
 });
